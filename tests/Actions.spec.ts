@@ -31,11 +31,41 @@ test('check box', async ({page})=>{
      await page.goto('https://testautomationpractice.blogspot.com/')
      const day:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
-    for(const d of day){
-     const checkBox:Locator = page.getByLabel(d)
-     await checkBox.check()
-     expect(checkBox).toBeChecked()
-     const ConditionOfCheck = await(checkBox.isChecked())
-     expect(ConditionOfCheck).toBe(true)
-    }
+     for(const a of day.slice(2)){
+        const checkday:Locator = page.getByLabel(a)
+        await (checkday).check()
+        await expect(checkday).toBeChecked()
+     }
+ 
+})
+
+
+test.only('checking the unchecked checkbox and unchecking the checked checkbox', async ({page})=>{
+     await page.goto('https://testautomationpractice.blogspot.com/')
+     const day:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+     for(const a of day){
+       const checkday = page.getByLabel(a)
+
+
+        if(await checkday.isChecked()){
+        await (checkday).uncheck()
+        await expect(checkday).not.toBeChecked()
+        } else {
+        await(checkday).check()
+        await expect(checkday).toBeChecked()
+     }
+
+     }
+
+     const indexes:number[] = [1,3,4,5];
+     
+     for (const i of indexes){
+        const checkday = page.getByLabel(day[i]);
+        await checkday.check();
+        await expect(checkday).toBeChecked()
+     }
+
+
+ 
 })
