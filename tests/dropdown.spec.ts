@@ -25,7 +25,7 @@ test('Multiple Select DropDown', async ({page})=>{
 
 })
 
-test.only('Validate the drop down dont have any duplicate options', async ({page})=>{
+test('Validate the drop down dont have any duplicate options', async ({page})=>{
         await page.goto('https://testautomationpractice.blogspot.com/')
         const colorOptions:Locator = await page.locator('#animals option')
         const colorArray:string[] = (await colorOptions.allTextContents()).map(text=>text.trim())
