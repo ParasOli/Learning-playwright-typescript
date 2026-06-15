@@ -40,7 +40,7 @@ test('check box', async ({page})=>{
 })
 
 
-test.only('checking the unchecked checkbox and unchecking the checked checkbox', async ({page})=>{
+test('checking the unchecked checkbox and unchecking the checked checkbox', async ({page})=>{
      await page.goto('https://testautomationpractice.blogspot.com/')
      const day:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
