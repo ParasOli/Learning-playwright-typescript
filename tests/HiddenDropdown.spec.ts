@@ -1,6 +1,8 @@
 import { test, expect, Locator } from '@playwright/test'
 
-test('validating the dropdown', async ({ page }) => {
+test('should select the second option from the Employment Status dropdown and validate it', async ({
+  page,
+}) => {
   await page.goto('https://opensource-demo.orangehrmlive.com/')
 
   const nameField: Locator = page.locator('[name="username"]')
@@ -20,14 +22,19 @@ test('validating the dropdown', async ({ page }) => {
   await page.waitForTimeout(3000)
 
   const options: Locator = page.locator('[role="option"] span')
-  console.log(await options.count())
-
   const arrayOfOptions: string[] = (await options.allTextContents()).map((text) =>
     text.trim()
   )
 
-  const selectedOption = arrayOfOptions[1]
-  await options.nth(1).click()
+  // pick the second item from the dropdown dynamically
+  let selectedOption = ''
+  for (const [index, option] of arrayOfOptions.entries()) {
+    if (index === 1) {
+      selectedOption = option
+      await options.nth(index).click()
+      break
+    }
+  }
 
   await expect(
     label.locator('..').locator('..').locator('.oxd-select-text-input')
