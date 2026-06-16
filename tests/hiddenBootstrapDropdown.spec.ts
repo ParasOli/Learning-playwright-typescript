@@ -36,3 +36,4 @@ test('validating the dropdown', async ({ page }) => {
     label.locator('..').locator('..').locator('.oxd-select-text-input')
   ).toHaveText('Freelance')
 })
+
