@@ -26,14 +26,10 @@ test('validating the dropdown', async ({ page }) => {
     text.trim()
   )
 
-  for (const option of arrayOfOptions) {
-    if (option.toLowerCase() === 'freelance') {
-      await page.locator('[role="option"] span').filter({ hasText: 'Freelance' }).click()
-    }
-  }
+  const selectedOption = arrayOfOptions[1]
+  await options.nth(1).click()
 
   await expect(
     label.locator('..').locator('..').locator('.oxd-select-text-input')
-  ).toHaveText('Freelance')
+  ).toHaveText(selectedOption)
 })
-
