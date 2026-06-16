@@ -26,7 +26,6 @@ test('should select the second option from the Employment Status dropdown and va
     text.trim()
   )
 
-  // pick the second item from the dropdown dynamically
   let selectedOption = ''
   for (const [index, option] of arrayOfOptions.entries()) {
     if (index === 1) {
@@ -40,3 +39,4 @@ test('should select the second option from the Employment Status dropdown and va
     label.locator('..').locator('..').locator('.oxd-select-text-input')
   ).toHaveText(selectedOption)
 })
+
