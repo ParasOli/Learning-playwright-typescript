@@ -6,8 +6,8 @@ test('comparing method', async ({page})=>{
     const count = await product.count()
 
     for(let i =0; i<count; i++){
-       const productName:string = await product.nth(i).innerText()
-        console.log(productName)
+       const productName:string | null  = await product.nth(i).textContent()
+        console.log(productName?.trim())
     }
 
 })
