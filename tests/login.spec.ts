@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 
-test('Success login', async({page})=>{
+test('successful login redirects to inventory page', async({page})=>{
   await page.goto('https://www.saucedemo.com/')
   await page.locator('#user-name').fill('standard_user')
   await page.locator('#password').fill('secret_sauce')
@@ -12,7 +12,7 @@ await expect(page.locator('.app_logo')).toBeVisible();
 })
 
 
-test('test2',async ({page})=>{
+test('invalid password shows error message', async ({page})=>{
   await page.goto('https://www.saucedemo.com/')
   await page.locator('#user-name').fill('standard_user')
   await page.locator('#password').fill('random password')

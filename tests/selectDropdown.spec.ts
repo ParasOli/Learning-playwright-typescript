@@ -1,6 +1,6 @@
 import { test, expect, Locator } from "@playwright/test";
 
-test('Single select DropDown', async({page})=>{
+test('single select dropdown selects country by value', async({page})=>{
       await page.goto('https://testautomationpractice.blogspot.com/')
 
       const countryDropDown: Locator = page.locator('#country')
@@ -15,7 +15,7 @@ test('Single select DropDown', async({page})=>{
       
 })
 
-test('Multiple Select DropDown', async ({page})=>{
+test('multi-select dropdown options are sorted alphabetically', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const colorOptions:Locator = await page.locator('#animals option')
     const lenghtofArray = await colorOptions.count()
@@ -25,7 +25,7 @@ test('Multiple Select DropDown', async ({page})=>{
 
 })
 
-test('Validate the drop down dont have any duplicate options', async ({page})=>{
+test('multi-select dropdown has no duplicate options', async ({page})=>{
         await page.goto('https://testautomationpractice.blogspot.com/')
         const colorOptions:Locator = await page.locator('#animals option')
         const colorArray:string[] = (await colorOptions.allTextContents()).map(text=>text.trim())

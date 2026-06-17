@@ -1,7 +1,7 @@
 
 import {test, expect, Locator} from '@playwright/test'
 
-test('input', async ({page })=>{
+test('name input field enforces maxlength and accepts typed value', async ({page })=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const nameInput: Locator = page.locator('#name')
     await expect(nameInput).toBeVisible();
@@ -17,7 +17,7 @@ test('input', async ({page })=>{
 })
 
 
-    test('radio button', async ({page})=>{
+    test('male radio button can be selected', async ({page})=>{
         await page.goto('https://testautomationpractice.blogspot.com/')
         const maleRadioButton:Locator = page.locator('#male')
         expect(maleRadioButton).toBeVisible()
@@ -27,7 +27,7 @@ test('input', async ({page })=>{
         expect(conditionOfCheckBox).toBe(true)
 })
 
-test('check box', async ({page})=>{
+test('check selected weekday checkboxes', async ({page})=>{
      await page.goto('https://testautomationpractice.blogspot.com/')
      const day:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
@@ -40,7 +40,7 @@ test('check box', async ({page})=>{
 })
 
 
-test('checking the unchecked checkbox and unchecking the checked checkbox', async ({page})=>{
+test('toggle all weekday checkboxes then check specific ones', async ({page})=>{
      await page.goto('https://testautomationpractice.blogspot.com/')
      const day:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
