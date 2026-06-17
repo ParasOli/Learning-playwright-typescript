@@ -19,7 +19,7 @@ test('comparing method', async ({ page }) => {
     }
 });
 
-test.only('allInnerText vs allTextContent', async ({ page }) => {
+test('allInnerText vs allTextContent', async ({ page }) => {
     // allInnerText example
     await page.goto('https://demowebshop.tricentis.com/');
     const product: Locator = page.locator('.product-title');
@@ -53,4 +53,18 @@ test.only('allInnerText vs allTextContent', async ({ page }) => {
       '\n            Simple Computer\n        '
     ]
     */
+
+});
+
+//converts locator into array 
+test.only('all method', async ({ page }) => {
+  await page.goto('https://demowebshop.tricentis.com/');
+
+  const products: Locator = page.locator('.product-title');
+  const allLocators: Locator[] = await products.all();
+
+  console.log(allLocators);        
+  for(const locator of allLocators){
+    console.log(await locator.innerText())
+  }
 });
