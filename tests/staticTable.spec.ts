@@ -35,9 +35,25 @@ test('printing all the data of the table exculding headers', async ({page})=>{
         console.log(rowText)
 
     }
+})
 
 
 
+test.only('printing the rows where author name is mukesh', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLoactor: Locator =  page.locator('[name="BookTable"] tr')
+    const allLocator = await tableLoactor.all()
+
+    for(const tablerows of allLocator.slice(1)){
+
+    
+        const author = await tablerows.locator('td').nth(1).innerText()
+        const bookname =await  tablerows.locator('td').nth(0).innerText()
+        if(author.trim() === 'Mukesh'){
+            console.log([bookname, author])
+        }
+
+    }
 })
 
 
