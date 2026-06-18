@@ -18,15 +18,30 @@ test('Validating the table column count match', async ({ page }) => {
   expect(columnCount).toBe(4)
 })
 
-test.only('get the data of the second row', async ({page})=>{
+test('get the data of the second row', async ({page})=>{
+    const secondRowData:(string | RegExp)[] = [ 'Learn Java', 'Mukesh', 'Java', '500' ]
       await page.goto('https://testautomationpractice.blogspot.com/')
-        const rowsLocator:Locator = page.locator('table[name="BookTable"] tr')
-      const data: string[] = await rowsLocator.nth(2).locator('td').allInnerTexts()
-  .then(data => data.map(text => text.trim()));
-  console.log(data)
+        const secondRowCells:Locator = page.locator('table[name="BookTable"] tr').nth(2).locator('td')
+        const SecondRowText: string[] =await secondRowCells.allInnerTexts()
+        await expect(secondRowCells).toHaveText(secondRowData); 
+})
+
+test('printing all the data of the table exculding headers', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLoactor: Locator =  page.locator('[name="BookTable"] tr')
+    const allLocator = await tableLoactor.all()
+    for(const tablerows of allLocator.slice(1)){
+        const rowText = await tablerows.locator('td').allInnerTexts()
+        console.log(rowText)
+
+    }
+
 
 
 })
+
+
+
 
 
 
