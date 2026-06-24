@@ -26,10 +26,27 @@ if(isDisable?.includes('disabled')){
 })
 
 
-test.only('Filter the rows count', async ({page})=>{
+test('Filter the rows count', async ({page})=>{
         await page.goto('https://datatables.net/')
         const dropDown = page.locator('#dt-length-0')
         await dropDown.selectOption({label:'25'})
         const rows= await page.locator('#example tbody tr').all()
         expect(rows.length).toBe(25)
 })
+
+test('Validating the search functionality -- Positive', async ({page})=>{
+      await page.goto('https://datatables.net/')
+      const searchBox = page.locator('[type="search"]')
+      await searchBox.fill('Tiger Nixon')
+      const rows = await page.locator('#example tbody tr').all()
+
+      if((rows).length>0){
+        for(const row of rows){
+            const filterName =await row.innerText()
+            expect(filterName.includes('Tiger Nixon'))
+        }
+
+      }
+})
+
+
