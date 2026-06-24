@@ -6,7 +6,6 @@ test('Verify chrome CPU value in dynamic table', async ({ page }) => {
     const table = page.locator('#taskTable');
     await expect(table).toBeVisible();
 
-    // Find CPU column index
     const headers = page.locator('#taskTable thead th');
     const headerCount = await headers.count();
 
