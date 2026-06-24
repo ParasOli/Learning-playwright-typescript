@@ -57,7 +57,7 @@ test('allInnerText vs allTextContent', async ({ page }) => {
 });
 
 //converts locator into array 
-test.only('all method', async ({ page }) => {
+test('all method', async ({ page }) => {
   await page.goto('https://demowebshop.tricentis.com/');
 
   const products: Locator = page.locator('.product-title');

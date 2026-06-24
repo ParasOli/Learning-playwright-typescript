@@ -39,7 +39,7 @@ test('printing all the data of the table exculding headers', async ({page})=>{
 
 
 
-test.only('printing the rows where author name is mukesh', async ({page})=>{
+test('printing the rows where author name is mukesh', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const tableLoactor: Locator =  page.locator('[name="BookTable"] tr')
     const allLocator = await tableLoactor.all()
