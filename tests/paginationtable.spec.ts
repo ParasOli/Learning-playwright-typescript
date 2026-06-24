@@ -17,21 +17,17 @@ if(isDisable?.includes('disabled')){
     pageExist = false
 }else{
     await nextButton.click()
-
-
 }
     }
-
-
 })
 
 
 test('Filter the rows count', async ({page})=>{
-        await page.goto('https://datatables.net/')
-        const dropDown = page.locator('#dt-length-0')
-        await dropDown.selectOption({label:'25'})
-        const rows= await page.locator('#example tbody tr').all()
-        expect(rows.length).toBe(25)
+    await page.goto('https://datatables.net/')
+    const dropDown = page.locator('#dt-length-0')
+    await dropDown.selectOption({label:'25'})
+    const rows= await page.locator('#example tbody tr').all()
+    expect(rows.length).toBe(25)
 })
 
 test('Validating the search functionality -- Positive', async ({page})=>{
