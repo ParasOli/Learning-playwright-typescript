@@ -37,16 +37,12 @@ test('printing all the data of the table exculding headers', async ({page})=>{
     }
 })
 
-
-
 test('printing the rows where author name is mukesh', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const tableLoactor: Locator =  page.locator('[name="BookTable"] tr')
     const allLocator = await tableLoactor.all()
 
     for(const tablerows of allLocator.slice(1)){
-
-    
         const author = await tablerows.locator('td').nth(1).innerText()
         const bookname =await  tablerows.locator('td').nth(0).innerText()
         if(author.trim() === 'Mukesh'){
@@ -57,7 +53,38 @@ test('printing the rows where author name is mukesh', async ({page})=>{
 })
 
 
+test('Validating the header text matches', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const headerToMatch:string[] = ['BookName', 'Author', 'Subject', 'Price']
+    const tableHeaderLocator  =  page.locator('[name="BookTable"] th')
+    const tableHeaderText:string[] =await tableHeaderLocator.allInnerTexts()
+     expect(tableHeaderText).toEqual(headerToMatch)
+})
 
 
+test('Validating price of Master in Selenium is 3000', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLocator:Locator  =  page.locator('[name="BookTable"] tr')
+    const allLocator = await tableLocator.all()
+
+    for (const tablerows of allLocator.slice(1)){
+        const BookName =  await tablerows.locator('td').nth(0).innerText()
+         const BookPrice =await  tablerows.locator('td').nth(3).innerText()
+
+         if(BookName.trim()==='Master In Selenium'){
+            expect(BookPrice).toEqual('3000')
+         }
+    }
+})
 
 
+test('3. Printing the last row data without hardcoding index', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLocator:Locator  =  page.locator('[name="BookTable"] tr')
+    const rowCount =await  tableLocator.count()
+    const lastRowData = await tableLocator.nth(rowCount-1).locator('td').allInnerTexts()
+    const trimText = lastRowData.map(text=>text.trim())
+    console.log(trimText)
+
+
+})
