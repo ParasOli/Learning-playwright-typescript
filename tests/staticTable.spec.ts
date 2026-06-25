@@ -53,19 +53,26 @@ test('printing the rows where author name is mukesh', async ({page})=>{
 })
 
 
-test.only('Validating the header text matches', async ({page})=>{
+test('Validating the header text matches', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const headerToMatch:string[] = ['BookName', 'Author', 'Subject', 'Price']
-    const tableHeader  =  page.locator('[name="BookTable"] th')
-    const tableHeaderText:string[] =await tableHeader.allInnerTexts()
+    const tableHeaderLocator  =  page.locator('[name="BookTable"] th')
+    const tableHeaderText:string[] =await tableHeaderLocator.allInnerTexts()
      expect(tableHeaderText).toEqual(headerToMatch)
-
 })
 
 
+test('Validating price of Master in Selenium is 3000', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLocator:Locator  =  page.locator('[name="BookTable"] tr')
+    const allLocator = await tableLocator.all()
 
+    for (const tablerows of allLocator.slice(1)){
+        const BookName =  await tablerows.locator('td').nth(0).innerText()
+         const BookPrice =await  tablerows.locator('td').nth(3).innerText()
 
-
-
-
-
+         if(BookName.trim()==='Master In Selenium'){
+            expect(BookPrice).toEqual('3000')
+         }
+    }
+})
