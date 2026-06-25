@@ -89,7 +89,7 @@ test('Printing the last row data without hardcoding index', async ({page})=>{
 
 
 
-test.only('Finding author and price of Learn JS', async ({page})=>{
+test('Finding author and price of Learn JS', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const rowsLocator:Locator = page.locator('[name="BookTable"] tr')
     const allLocator = rowsLocator.all()
@@ -103,6 +103,5 @@ test.only('Finding author and price of Learn JS', async ({page})=>{
             console.log(`Author name of Learn JS book is ${bookAuthor}`)
             console.log(`Price of Learn JS book is ${BookPrice}`)
         }
-
     }
 })
