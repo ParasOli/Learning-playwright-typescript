@@ -76,3 +76,15 @@ test('Validating price of Master in Selenium is 3000', async ({page})=>{
          }
     }
 })
+
+
+test('3. Printing the last row data without hardcoding index', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const tableLocator:Locator  =  page.locator('[name="BookTable"] tr')
+    const rowCount =await  tableLocator.count()
+    const lastRowData = await tableLocator.nth(rowCount-1).locator('td').allInnerTexts()
+    const trimText = lastRowData.map(text=>text.trim())
+    console.log(trimText)
+
+
+})
