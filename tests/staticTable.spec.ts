@@ -78,13 +78,31 @@ test('Validating price of Master in Selenium is 3000', async ({page})=>{
 })
 
 
-test('3. Printing the last row data without hardcoding index', async ({page})=>{
+test('Printing the last row data without hardcoding index', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const tableLocator:Locator  =  page.locator('[name="BookTable"] tr')
     const rowCount =await  tableLocator.count()
     const lastRowData = await tableLocator.nth(rowCount-1).locator('td').allInnerTexts()
     const trimText = lastRowData.map(text=>text.trim())
     console.log(trimText)
+})
 
 
+
+test.only('Finding author and price of Learn JS', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const rowsLocator:Locator = page.locator('[name="BookTable"] tr')
+    const allLocator = rowsLocator.all()
+
+    for(const tablerows of (await allLocator).slice(1)){
+        const bookName = await tablerows.locator('td').nth(0).innerText()
+        const bookAuthor = await tablerows.locator('td').nth(1).innerText()
+        const BookPrice = await tablerows.locator('td').last().innerText()
+
+        if(bookName ==='Learn JS'){
+            console.log(`Author name of Learn JS book is ${bookAuthor}`)
+            console.log(`Price of Learn JS book is ${BookPrice}`)
+        }
+
+    }
 })
