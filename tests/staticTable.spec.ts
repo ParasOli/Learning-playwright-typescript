@@ -37,16 +37,12 @@ test('printing all the data of the table exculding headers', async ({page})=>{
     }
 })
 
-
-
 test('printing the rows where author name is mukesh', async ({page})=>{
     await page.goto('https://testautomationpractice.blogspot.com/')
     const tableLoactor: Locator =  page.locator('[name="BookTable"] tr')
     const allLocator = await tableLoactor.all()
 
     for(const tablerows of allLocator.slice(1)){
-
-    
         const author = await tablerows.locator('td').nth(1).innerText()
         const bookname =await  tablerows.locator('td').nth(0).innerText()
         if(author.trim() === 'Mukesh'){
@@ -55,6 +51,18 @@ test('printing the rows where author name is mukesh', async ({page})=>{
 
     }
 })
+
+
+test.only('Validating the header text matches', async ({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    const headerToMatch:string[] = ['BookName', 'Author', 'Subject', 'Price']
+    const tableHeader  =  page.locator('[name="BookTable"] th')
+    const tableHeaderText:string[] =await tableHeader.allInnerTexts()
+     expect(tableHeaderText).toEqual(headerToMatch)
+
+})
+
+
 
 
 
