@@ -14,14 +14,29 @@ test('Simple dialog', async ({ page }) => {
     await page.locator('#alertBtn').click()
 })
 
-test.only('Confirmation dialog', async({page})=>{
+test('Confirmation dialog', async({page})=>{
      await page.goto('https://testautomationpractice.blogspot.com/');
     page.on('dialog', (dialog)=>{
         expect(dialog.message()).toContain('Press a button!')
         dialog.dismiss()   
     })
     await page.locator('#confirmBtn').click()
-    expect(page.locator('#demo')).toContainText('You pressed Cancel!')
+    await expect(page.locator('#demo')).toContainText('You pressed Cancel!')
+
+})
+
+
+
+test('Prompt dialog', async({page})=>{
+     await page.goto('https://testautomationpractice.blogspot.com/');
+     let name = 'paras';
+    page.on('dialog', (dialog)=>{
+        expect(dialog.message()).toContain('Please enter your name:')
+        expect(dialog.defaultValue()).toContain('Harry Potter')
+        dialog.accept('paras')  
+    })
+    await page.locator('#promptBtn').click()
+    await expect(page.locator('#demo')).toContainText('paras')
 
 })
 
