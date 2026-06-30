@@ -1,6 +1,5 @@
 import { Locator, test, expect, Page } from '@playwright/test';
 
-
 let dateSelectingFunction =async( page:Page, day:string, month:string, year:string, isfuture:boolean)=>{
         const datePicker:Locator = page.locator('#datepicker')
     await datePicker.click()
@@ -34,25 +33,19 @@ let dateSelectingFunction =async( page:Page, day:string, month:string, year:stri
 
 }
 
-test.only('JQuery datepicker for future date - using loop', async ({ page }) => {
-    await page.goto('https://testautomationpractice.blogspot.com/');
-
-    const year ='2024'
-    const month = 'August'
-    const day = '16'
-
-    await dateSelectingFunction(page, day, month, year, false)
-
-
-})
-
-
-
 
 test('JQuery datepicker- using fill', async ({ page }) => {
     await page.goto('https://testautomationpractice.blogspot.com/');
     const datePicker:Locator = page.locator('#datepicker')
     datePicker.fill("30/06/2026")
     await page.waitForTimeout(4000) 
+
+})
+
+test('JQuery datepicker for future date - using loop', async ({ page }) => {
+    await page.goto('https://testautomationpractice.blogspot.com/');
+
+    await dateSelectingFunction(page, '16', 'August', '2024', false)
+
 
 })
