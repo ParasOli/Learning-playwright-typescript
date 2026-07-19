@@ -15,7 +15,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html']],
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: 'https://restful-booker.herokuapp.com',
     screenshot:'only-on-failure',
     trace:'on'
     // video:'retain-on-failure'
